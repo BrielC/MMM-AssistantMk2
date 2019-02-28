@@ -6,7 +6,7 @@
 ```
 #example for RPI
 cd ~/MagicMirror/modules/MMM-AssistantMk2/gaction
-wget hhttps://dl.google.com/gactions/updates/bin/linux/arm/gactions
+wget https://dl.google.com/gactions/updates/bin/linux/arm/gactions
 chmod +x gactions
 ```
 
