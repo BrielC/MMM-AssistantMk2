@@ -4,7 +4,7 @@
 var ytp
 Module.register("MMM-AssistantMk2", {
   defaults: {
-    verbose:false,
+    verbose:true,
     projectId: "", // Google Assistant ProjectId (Required only when you use gAction.)
     useGactionCLI: false,
     startChime: "connection.mp3",
@@ -58,35 +58,7 @@ Module.register("MMM-AssistantMk2", {
         command: "SHUTDOWN"
       }
     },
-    action: {
-      /*
-      "com.example.commands.REBOOT" : {
-        notification: "SHOW_ALERT",
-        payload: {
-          message: "You've ordered REBOOT",
-          timer: 3000,
-        }
-      },
-      "com.example.commands.PAGE" : {
-        notification: (params) => {
-          if (params.number) {
-            return "PAGE_CHANGED"
-          } else if (params.incordec == "INC") {
-            return "PAGE_INCREMENT"
-          } else {
-            return "PAGE_DECREMENT"
-          }
-        },
-        payload: (params) => {
-          if (params.number) {
-            return params.number
-          } else {
-            return null
-          }
-        }
-      }
-      */
-    },
+    action: {},
 
     command: {
       "HIDEMODULES": {
@@ -221,6 +193,8 @@ Module.register("MMM-AssistantMk2", {
       ASSISTANT_ACTIVATED: "ASSISTANT_ACTIVATED",
       ASSISTANT_DEACTIVATED: "ASSISTANT_DEACTIVATED",
       ASSISTANT_ACTION: "ASSISTANT_ACTION",
+      ASSISTANT_UNDERSTOOD: "ASSISTANT_UNDERSTOOD",
+      ASSISTANT_RESPONSE_END: "ASSISTANT_RESPONSE_END",
       DEFAULT_HOOK_NOTIFICATION: "ASSISTANT_HOOK",
       TEXT_QUERY: "ASSISTANT_QUERY",
       SAY_TEXT: "ASSISTANT_SAY"
@@ -366,6 +340,7 @@ Module.register("MMM-AssistantMk2", {
         this.assistant.responseStart(payload)
         break
       case "RESPONSE_END":
+        this.sendNotification(this.config.notifications.ASSISTANT_RESPONSE_END)
         break
       case "CONVERSATION_END":
         this.assistant.conversationEnd(payload)
@@ -537,6 +512,10 @@ class AssistantHelper {
 
     if (key == "STANDBY") {
       this.subdom.mic.className = ""
+    }
+
+    if (key == "UNDERSTANDING") {
+      this.sendNotification(this.config.notifications.ASSISTANT_UNDERSTOOD)
     }
   }
 
