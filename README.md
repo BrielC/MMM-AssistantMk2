@@ -1,3 +1,9 @@
+forked from eouia/MMM-AssistantMk2
+&
+mthalhof/MMM-NowPlayingOnSpotify
+with custom addition such as youtube player continue after hotword detected or assistant activate. 
+Youtube play play very small in the mk2 assistant frame . 
+
 ## MMM-AssistantMk2
 `MMM-AssistantMk2` is an embedded google assistant on MagicMirror.
 
